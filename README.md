@@ -1,2 +1,2 @@
 # iOSKivyCalculator
-Kivty calculator similar to the standard iOS calculator
+Kivy calculator similar to the standard iOS calculator
