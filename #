@@ -1,0 +1,45 @@
+        SignButton:
+            text:"/"
+            on_press:entry.text += self.text
+            font_name: ('fonts/SFUIDisplay-Regular.ttf')
+            color: (1, 1, 1, 1)
+               Button:
+            text:"C"
+            color: ('#D4D4D2')
+            background_color: ('#000000')
+            font_name: ('fonts/SFUIDisplay-Regular.ttf')
+            Image:
+
+                source: 'Buttons/Серая Кнопка.png'
+                y: self.parent.y + self.parent.height - 250
+                x: self.parent.x + 100
+                size: 270, 270
+                allow_stretch: True
+
+
+
+
+
+
+        RoundedButton:
+            text:","
+            on_press:entry.text += ('.')
+            font_name: ('fonts/SFUIDisplay-Regular.ttf')
+            font_size: 32
+            pos_hint: {'center_x': 0.8}
+            size_hint: (1, 1)
+            #background_normal: ''
+            #background_color: ('#FF9500')
+            #color: (1, 1, 1, 1)
+
+<RoundedButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (12/255, 84/255, 200/255, 1)
+
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [50]

@@ -1,19 +1,19 @@
 [app]
 
 # (str) Title of your application
-title = Калькулятор
+title = iOS Calculator
 
 # (str) Package name
-package.name = daniliammocalculator
+package.name = iOSCalculator
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.daniliammo
+package.domain = RU.GAIFAM.CALCULATOR
 
 # (str) Source code where the main.py live
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,kv,ttf,json
+source.include_exts = py,png,jpg,kv,atlas
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -29,7 +29,7 @@ source.include_exts = py,kv,ttf,json
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 1.91
+version = 1.1
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -44,13 +44,13 @@ requirements = python3,kivy
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-presplash.filename = %(source.dir)s/data/presplash.png
+#presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/data/icon.png
+#icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
-orientation = all
+orientation = portrait
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
@@ -393,7 +393,7 @@ warn_on_root = 1
 # build_dir = ./.buildozer
 
 # (str) Path to build output (i.e. .apk, .aab, .ipa) storage
-#bin_dir = ./bin/calc.ipa
+# bin_dir = ./bin
 
 #    -----------------------------------------------------------------------------
 #    List as sections
@@ -419,9 +419,7 @@ warn_on_root = 1
 #    Profiles
 #
 #    You can extend section / key with a profile
-#    For example, you want to deploy a demo 
-
- of your application without
+#    For example, you want to deploy a demo version of your application without
 #    HD content. You could first change the title to add "(demo)" in the name
 #    and extend the excluded directories to remove the HD content.
 #

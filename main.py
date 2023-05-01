@@ -1,156 +1,106 @@
 import os
-from kivy.config import Config  # Должен импортироваться первым
+# from kivy.config import Config  # Конфиг Импортируется первым и прописан тоже первым.
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.popup import Popup
-from kivy.uix.button import Button
-from SettingsJsonReader import SettingsReader
-from kivy.lang.builder import Builder
-
-Config.set("graphics", "resizable", '1')
-Config.set('graphics', 'width', '1800')  # 4:3
-Config.set('graphics', 'height', '900')
-Config.write()
-
-# Radius Settings
-class NullGrayRoundedButton(Button):
-    radiust = str(SettingsReader.lineRadius)
-    GrayRadius = [eval(radiust)]
+# Config.set('graphics', 'resizable', 1)
+# Config.set('graphics', 'width', '650')
+# Config.set('graphics', 'height', '1015')
+# Config.write()
 
 
-class GrayRoundedButton(Button):
-    radiust = str(SettingsReader.lineRadius)
-    GrayRadius = [eval(radiust)]
-
-
-class LightGrayRoundedButton(Button):
-    radiust = str(SettingsReader.lineRadius)
-    radiustor = [eval(radiust)]
-
-
-class OrangeRoundedButton(Button):
-    OrangeRadius = str(SettingsReader.lineRadius)
-    OrangeRadius = [eval(OrangeRadius)]
-
-
-class LightSettingsRoundedButton(Button):
-    radiust = str(SettingsReader.lineRadius)
-    radiustor = [eval(radiust)]
-
-
-# Настройки
 class SettingsWindow(Popup):
 
-    __version__ = '1.9'
+    def remove_log(self):
+        try:
+            os.remove('log.txt')
 
-    # Button Settings Size
-    SizeSettingsButton = str(SettingsReader.SButtonSize)
-    SizeSettingsButtonX = str(SettingsReader.SButtonSizeX)
+        except Exception as rlog:
+            print(rlog)
 
-    # Orange, Light Gray, Gray buttons font size
-    ButtonFontSize = int(SettingsReader.SettingButton)
+    def SetFontSize(self):
 
-    # Padding
-    PadyIng = str(SettingsReader.PaddingJson).replace(']', '').replace('[', '')
+        self.FontSizeX = self.ids.SetFont.text
+        print('FontSize: ', str(self.FontSizeX))
 
-    # Ellipse or RoundedRectangle
-    FalseOrTrue = bool(SettingsReader.boolIsEllipse)
+        if not os.path.exists('settings.txt'):
+            settingsfile = open("settings.txt", "w")
+            settingsfile.close()
 
-    # Read Popup Resolution
-    UIP2Resolution = int(SettingsReader.PopupResolution)
+        with open('settings.txt') as file:
+            for line in file:
+                print(line)
 
-    UIResolutionfortxtin = int(SettingsReader.PopupResolutionX)
-    UIResolutionx = UIP2Resolution, UIResolutionfortxtin
+        with open('settings.txt', 'r') as f:
+            old_data = f.read()
 
-    # Read Settings Font Size
+        new_data = old_data.replace(str(line), str(self.FontSizeX))
 
-    StngsFontSize = int(SettingsReader.SettingsFontSize)
+        with open('settings.txt', 'w') as f:
+            f.write(new_data)
 
-    # Read Radius Value
-
-    ilineRadius = int(SettingsReader.lineRadius)
-
-    # Read Answer Font Size
-    setlineb = int(SettingsReader.AnsFontSize)
-
-    FirstInt = int(SettingsReader.btnsize_evalx)
-
-    # FUNC
-
-    def WriteSettings(self):
-
-        EllipseX = self.ids.EllipseCheckingBox.active
-        ReplacePaddingList = '[' + self.ids.SetPopupSizeVZO.text + ']'
-
-        if EllipseX is True:
-            EllipseV = str(EllipseX)
-            EllipseZ = EllipseV.replace('T', 't')
-
-        if EllipseX is False:
-            EllipseV = str(EllipseX)
-            EllipseZ = EllipseV.replace('F', 'f')
-
-        os.remove('settings.json')
-        sFile = open('settings.json', 'w')
-        sFile.write('{\n    "settings": [\n        {\n            "ISEllipse": ' + EllipseZ + ',\n            '
-                    '"SettingsButtonSize": ' + self.ids.SettingsButtonSizeTxtInput.text + ','
-                    '\n            "SettingsButtonSizeX": ' + self.ids.SettingsButtonSizeXTxtInput.text + ',\n            '
-                    '"SettingsButton": ' + self.ids.SetFontButton.text + ',\n            "PopupResolution": ' + self.ids.SetPopupSizeX.text +
-                    ',\n            "PopupResolutionX": ' + self.ids.SetPopupSize.text +
-                    ''
-                    ',\n            "Radius": ' + self.ids.SetFontR.text +
-                    ',\n'
-                    '            "SettingsFontSize": ' + self.ids.TIFontSizeSettings.text +
-                    ''
-                    ',\n            "Answer-Font-Size": ' + self.ids.SetFontAnswer.text + ',\n'
-                    '            "EmptyBoxLayoutSize": '
-                    '35,\n '
-                    '           "Settings-Button-Size-Float": 125,\n'
-                    '            "Settings-Button-Size-Float-X": 35,\n            '
-                    '"Язык": "🇷🇺",\n            "Padding": ' + ReplacePaddingList + '\n        }\n    ]\n}'
-                                                                                               '\n')
-        sFile.close()
+        print('Установлено: ', str(self.FontSizeX))
         self.dismiss()
 
-# MAIN
+        ###############################################################
+
+        self.FontSizeXB = self.ids.SetFontButton.text
+        print('FontSize: ', str(self.FontSizeXB))
+
+        if not os.path.exists('settingsbutton.txt'):
+            settingsfile = open("settingsbutton.txt", "w")
+            settingsfile.close()
+
+        with open('settingsbutton.txt') as file:
+            for line in file:
+                print(line)
+
+        with open('settingsbutton.txt', 'r') as f:
+            old_data = f.read()
+
+        new_data = old_data.replace(str(line), str(self.FontSizeXB))
+
+        with open('settingsbutton.txt', 'w') as f:
+            f.write(new_data)
 
 
 class CalcGridLayout(GridLayout):
 
-    # Padding
-    PadyIng = list(SettingsReader.PaddingJson)
+    if not os.path.exists('settings.txt'):
+        settingsfilec = open("settings.txt", "w", encoding='utf-8')
+        settingsfilec.write('128')
+        settingsfilec.close()
 
-    # Button Settings Size
-    SizeSettingsButton = int(SettingsReader.SButtonSize)
-    SizeXSettingsButton = int(SettingsReader.SButtonSizeX)
+    try:
+        with open('settings.txt') as file:
+            for line in file:
+                setline = line
+                print(line)
 
-    # Settings Button Font Size calculate
-    FontSizeSettingsButton = SizeXSettingsButton * SizeSettingsButton
-    FontSizeSettingsButtonX = FontSizeSettingsButton // SizeSettingsButton // 1.5
-    # print(FontSizeSettingsButtonX, 'Font Size ==', FontSizeSettingsButtonX)
+    except Exception as exx:
+        print(exx)
 
-    # BoxLayout Height bxl
+    if not os.path.exists('settingsbutton.txt'):
+        settingsfilec = open("settingsbutton.txt", "w", encoding='utf-8')
+        settingsfilec.write('72')
+        settingsfilec.close()
 
-    SetSizeEmptyBox = int(SettingsReader.EmptyBoxLsize)
+    try:
+        with open('settingsbutton.txt') as file:
+            for lineb in file:
+                setlineb = lineb
+                print(lineb)
 
-    # Answer Font Size
-
-    setline = int(SettingsReader.AnsFontSize)
-    setlineb = int(SettingsReader.SettingButton)
-
-    # FUNC
+    except Exception as exxb:
+        print(exxb)
 
     def positive_number(self):
 
-        if self.ids.entry.text == '':
-            pass
+        if "-" in self.ids.entry.text:
+            self.ids.entry.text = f'{self.ids.entry.text.replace("-", "")}'
 
         else:
-            if "-" in self.ids.entry.text:
-                self.ids.entry.text = f'{self.ids.entry.text.replace("-", "")}'
-
-            else:
-                self.ids.entry.text = f"-{self.ids.entry.text}"
+            self.ids.entry.text = f"-{self.ids.entry.text}"
 
     def Clear(self):
 
@@ -160,45 +110,43 @@ class CalcGridLayout(GridLayout):
             self.ids.entry.text = ''
 
         if len(x) > -1:
+
             a = self.ids.entry.text[:-1]
-            self.ids.entry.text = a
+            self.ids.entry.text = (a)
+
+    def Check(self):
+
+        if "," not in (self.ids.entry.text):
+            print('Запятая не обнаружена.')
+
+        elif "," in self.ids.entry.text:
+            axa = self.ids.entry.text.replace(",", ".")
+            print(axa)
+            print('Запятая обнаружена.')
 
     def Calculate(self, calculation):
 
         if calculation:
-
             try:
                 self.display.text = str(eval(calculation))
 
-            except:
-                self.display.text = "Ошибка"
+            except Exception as e:
+
+                self.display.text = "Ошибка"  # + str(e)
+                settingsfile = open("log.txt", "a", encoding='utf-8')
+                settingsfile.write('\n' + str(e))
+                settingsfile.close()
 
 
-# Build
-
-
-class iOSCalculatorEllipseApp(App):  # or iOSCalculatorApp
-
-    title = "Калькулятор"
+class iOSCalculatorApp(App):
 
     def build(self):
+
+        # Window.set_system_cursor('hand')
+        # Window.show_cursor = (True)
+        # Window.clearcolor = (1, 1, 1, 1)
         return CalcGridLayout()
 
 
-class iOSCalculatorApp(App):  # or iOSCalculatorApp
-
-    title = "Калькулятор"
-
-    def build(self):
-        return CalcGridLayout()
-
-
-if SettingsReader.boolIsEllipse is True:
-    Builder.load_file('ioscalculator.kv')
-    calcAppE = iOSCalculatorEllipseApp()  # or iOSCalculatorApp
-    calcAppE.run()
-
-else:
-    Builder.load_file('ioscalculator.kv')
-    calcApp = iOSCalculatorApp()  # or iOSCalculatorApp
-    calcApp.run()
+calcApp = iOSCalculatorApp()
+calcApp.run()
